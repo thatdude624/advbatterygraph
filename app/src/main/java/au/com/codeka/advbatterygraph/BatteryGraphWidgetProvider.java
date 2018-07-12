@@ -208,13 +208,13 @@ public class BatteryGraphWidgetProvider extends AppWidgetProvider {
 
     if (graphSettings.showBatteryGraph()) {
       batteryChargePoints = renderChargeGraph(batteryHistory, numMinutes, width,
-          graphHeight, Color.GREEN);
+          graphHeight, graphSettings.batteryGraphColour());
       numGraphsShowing++;
     }
     if (graphSettings.showTemperatureGraph()) {
       numGraphsShowing++;
       tempPoints = renderTempGraph(batteryHistory, numMinutes, width, graphHeight,
-          graphSettings.smoothTemp() ? 20 : 0);
+          graphSettings.smoothTemp() ? 20 : 0, graphSettings.tempGraphColour());
     }
     if (graphSettings.showBatteryCurrentInstant()) {
       final float scale = graphSettings.invertBatteryCurrentInstant() ? -1.0f : 1.0f;
@@ -574,7 +574,7 @@ public class BatteryGraphWidgetProvider extends AppWidgetProvider {
   }
 
   private List<GraphPoint> renderTempGraph(List<BatteryStatus> history, int numMinutes,
-      int width, int height, int smoothness) {
+      int width, int height, int smoothness, int color) {
     height -= 4;
     ArrayList<GraphPoint> points = new ArrayList<>();
     if (history.size() < 2) {
@@ -625,7 +625,7 @@ public class BatteryGraphWidgetProvider extends AppWidgetProvider {
       temp = getSmoothedTemp(history, j, lastIndices, pixelsPerMinute, smoothness);
       lastIndices.add(j);
       y = 2 + height - (height * getTempFraction(temp, minTemp, maxTemp));
-      points.add(new GraphPoint(x, y, Color.BLUE));
+      points.add(new GraphPoint(x, y, color));
     }
 
     return points;

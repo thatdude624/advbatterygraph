@@ -15,4 +15,9 @@
                     android:entries="@array/temp_units_display"
                     android:entryValues="@array/temp_units_values" />
   </PreferenceCategory>
+  <PreferenceCategory android:title="Colours">
+    <com.jaredrummler.android.colorpicker.ColorPreference
+            android:key="au.com.codeka.advbatterygraph.(%d).TempGraphColour"
+            android:title="Temperature graph colour"/>
+  </PreferenceCategory>
 </PreferenceScreen>

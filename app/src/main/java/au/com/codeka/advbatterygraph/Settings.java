@@ -2,10 +2,8 @@ package au.com.codeka.advbatterygraph;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.preference.PreferenceManager;
-
-import java.util.Map;
-import java.util.TreeMap;
 
 public class Settings {
     private SharedPreferences mPreferences;
@@ -81,6 +79,9 @@ public class Settings {
         private boolean mShowTimeLines;
         private boolean mAutoGraphSize;
 
+        private int mBatteryGraphColour;
+        private int mTempGraphColour;
+
         public boolean autoGraphSize() { return mAutoGraphSize; }
         public int getGraphWidth() {
             return mGraphWidth;
@@ -116,6 +117,14 @@ public class Settings {
             return mShowTimeLines;
         }
 
+        public int batteryGraphColour() {
+            return mBatteryGraphColour;
+        }
+        public int tempGraphColour() {
+            return mTempGraphColour;
+        }
+
+
         public static GraphSettings get(SharedPreferences pref, String prefix) {
             GraphSettings gs = new GraphSettings();
             gs.mPrefix = prefix;
@@ -135,6 +144,9 @@ public class Settings {
             gs.mNumHours = Integer.parseInt(pref.getString(prefix + "NumHours", Integer.toString(48)));
             gs.mShowTimeScale = pref.getBoolean(prefix+"ShowTime", false);
             gs.mShowTimeLines = pref.getBoolean(prefix+"ShowTimeLines", false);
+
+            gs.mBatteryGraphColour = pref.getInt(prefix+"BatteryGraphColour", Color.GREEN);
+            gs.mTempGraphColour = pref.getInt(prefix+"TempGraphColour", Color.BLUE);
             return gs;
         }
 
@@ -157,6 +169,9 @@ public class Settings {
                 .putString(prefix + "NumHours", Integer.toString(mNumHours))
                 .putBoolean(prefix+"ShowTime", mShowTimeScale)
                 .putBoolean(prefix+"ShowTimeLines", mShowTimeLines)
+
+                .putInt(prefix+"BatteryGraphColour", mBatteryGraphColour)
+                .putInt(prefix+"TempGraphColour", mTempGraphColour)
                 .apply();
         }
     }

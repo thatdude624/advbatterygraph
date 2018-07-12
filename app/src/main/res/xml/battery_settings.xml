@@ -5,6 +5,10 @@
             android:title="Battery Charge"
             android:summary="Include a graph of battery charge percentage."
             android:defaultValue="true" />
+        <com.jaredrummler.android.colorpicker.ColorPreference
+                android:key="au.com.codeka.advbatterygraph.(%d).BatteryGraphColour"
+                android:title="Battery graph colour"
+                />
     </PreferenceCategory>
     <PreferenceCategory android:title="Current (Instantaneous)">
         <CheckBoxPreference
